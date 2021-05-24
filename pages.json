@@ -1,0 +1,70 @@
+{
+	"pages": [
+		{
+			"path": "pages/index/index"//,
+			// "style": {
+			// 	"navigationBarTitleText": "首页"
+			// }
+		}
+		,
+		{
+		    "path" : "pages/category/index",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		
+		{
+			"path" : "pages/userCenter/userCenter"//,
+			// "style" :                                                                                    
+			// {
+			// 	"navigationBarTitleText": "个人中心",
+			// 	"enablePullDownRefresh": false
+			// }
+			
+		},
+		{
+			"path": "pages/searchRes/searchRes"
+		}
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationStyle":"custom",
+		// "usingComponents": {
+		// 	"mp-navigation-bar": "../../components/navigationBar/navigationBar"
+		// },
+		// "navigationBarTitleText": "红脚本",
+		// "navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"app-plus": {
+			"background": "#efeff4"
+		}
+	},
+	"tabBar": {
+		"color":"#000000",
+		"selectedColor": "#FF2E81",
+		"list": [
+			{
+				"pagePath": "pages/index/index",
+				"text": "首页",
+				"iconPath": "static/pages/index.png",
+				"selectedIconPath": "static/pages/indexSelected.png"
+			},
+			{
+				"pagePath": "pages/category/index",
+				"text": "明星分类",
+				"iconPath": "static/pages/category.png",
+				"selectedIconPath": "static/pages/categorySelected.png"
+			},
+			{
+				"pagePath": "pages/userCenter/userCenter",
+				"text": "个人中心",
+				"iconPath": "static/pages/userCenter.png",
+				"selectedIconPath": "static/pages/userCenterSelected.png"
+			}
+		]
+	}
+}

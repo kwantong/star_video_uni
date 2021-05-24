@@ -1,0 +1,14 @@
+/* #ifndef APP-PLUS-NVUE */
+page {
+    min-height: 100%;
+    height: 100%;
+	/* background-color: rgb(40, 40, 40); */
+	/* color: #FFFFFF; */
+}
+/* #endif */
+/* 解决头条小程序字体图标不显示问题，因为头条运行时自动插入了span标签，且有全局字体 */
+/* #ifdef MP-TOUTIAO */
+/* text :not(view) {
+    font-family: uniicons;
+} */
+/* #endif */
