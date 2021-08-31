@@ -1,202 +1,184 @@
 <template>
 	<view class="index_main">
-		<hNavigationBar :showLogo="true" />
+		<h-navigation-bar  :showLogo="true" titleAlign="left" background-color="#FFFFFF"></h-navigation-bar>
 		<r-header></r-header>
-		<scroll-view class="index_list_wrap" scroll-y="true" @scrolltoupper="upper" @scrolltolower="lower" @scroll="scroll" scroll-with-animation="true">
-			<view class="uni-margin-wrap">
-				<swiper class="swiper" circular :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration">
-					<swiper-item v-for="(item, index) in background" :key="index">
-						<view class="swiper-item" :style="{background: item.bgColor}">{{ item.name }}</view>
+		<view>
+			<view class="uni-margin-wrap" v-if="list.advertiseList && list.advertiseList.length > 0 ">
+				<swiper class="swiper" circular :indicator-dots="indicatorDots" :autoplay="autoplay" indicator-active-color="#FF3636" indicator-color="#FFFFFF" :interval="interval" :duration="duration">
+					<swiper-item v-for="(item, index) in list.advertiseList" :key="index" @click="goBannerInfo(item)">
+						<image class="swiper-item" :src="item.pic"></image>
 					</swiper-item>
 				</swiper>
 			</view>
 			<class-bar />
-			<view class="index_list_main">
-				<view class="index_list_main_header">
-					<view class="index_list_title">
-						<image class="title_img" src="../../static/pages/椭圆形.png" mode="aspectFit"></image>
-						<text>人气明星</text>
-					</view>
-					<navigator class="more_text" url="../category/category">
-						<text>更多</text>
-						<image class="more_img" src="../../static/pages/download01.png" mode="aspectFit"></image>
-					</navigator>
-				</view>
-				<view class="index_list_main_content">
-					<view class="index_list_main_item" v-for="item in recommendList" :key="item.id">
-						<image class="index_list_main_img" :src="item.imgUrl" mode="aspectFill"></image>
-						<text class="index_list_main_text">{{ item.name }}</text>
-						<text class="index_type">{{ item.type }}</text>
-						<view class="index_list_main_text index_list_main_price">
-							<image class='coin_img' src="../../static/pages/coin2.png" mode="aspectFit"></image>
-							<text>{{ item.price }}</text>
-						</view>
-					</view>
-				</view>
-			</view>
-			<view class="index_list_main">
-				<view class="index_list_main_header">
-					<view class="index_list_title">
-						<image class="title_img" src="../../static/pages/椭圆形.png" mode="aspectFit"></image>
-						<text>推荐艺人</text>
-					</view>
-					<navigator class="more_text" url="../category/category">
-						<text>更多</text>
-						<image class="more_img" src="../../static/pages/download01.png" mode="aspectFit"></image>
-					</navigator>
-				</view>
-				<view class="index_list_main_content">
-					<view class="index_list_main_item" v-for="item in recommendList" :key="item.id">
-						<image class="index_list_main_img" :src="item.imgUrl" mode="aspectFill"></image>
-						<text class="index_list_main_text">{{ item.name }}</text>
-						<text class="index_type">{{ item.type }}</text>
-						<view class="index_list_main_text index_list_main_price">
-							<image class='coin_img' src="../../static/pages/coin2.png" mode="aspectFit"></image>
-							<text>{{ item.price }}</text>
+			<view class="index_list_main" v-if="list.hotTenantList && list.hotTenantList.length > 0 ">
+				<home-line-title title="人气明星" linkUrl="./tenantAll?type=1"></home-line-title>
+				<view class="list_main_content">
+					<view class="list_main_item popularStars" v-for="(item,index) in list.hotTenantList" :key="index" @click="getstarDetails(item)">
+						<image class="list_main_img" :src="item.thumbnailUrl" mode="aspectFill"></image>
+						<image class="popularStarsTagimg" src="../../static/pages/picture/popularStar.png" mode="aspectFill"></image>
+						<view class="list_main_text">
+							<view class="list_main_name">{{ item.realName }}</view>
+							<view class="goodsTypeHidden">
+								<text class="list_main_type" v-for="(i,ind) in item.tenantTypeList" :key="ind">{{i.tenantTypeName}}</text>
+							</view>
+							<!-- <view class="list_main_price">
+								<image class='list_main_coinImg' src="/static/pages/me/coin.png" mode="aspectFit"></image>
+								<text>{{ item.afterDiscountPrice }} 角本币</text>
+							</view> -->
 						</view>
 					</view>
 				</view>
 			</view>
 			
-			<view style="width: 100%;height: 350rpx;">
-				<image style="width: 100%;height: 100%;" src="../../static/pages/投票榜.png" mode="aspectFit"></image>
+			<view class="index_list_main" v-if="list.recommendTenantList && list.recommendTenantList.length > 0 ">
+				<home-line-title title="推荐艺人" linkUrl="./tenantAll?type=2"></home-line-title>
+				<view class="list_main_content">
+					<view class="list_main_item" v-for="(item,index) in list.recommendTenantList" :key="index" @click="getstarDetails(item)">
+						<image class="list_main_img" :src="item.thumbnailUrl" mode="aspectFill"></image>
+						<view class="list_main_text">
+							<view class="list_main_name">{{ item.realName }}</view>
+							<view class="goodsTypeHidden">
+								<text class="list_main_type" v-for="(i,ind) in item.tenantTypeList" :key="ind">{{i.tenantTypeName}}</text>
+							</view>
+							<!-- <view class="list_main_price">
+								<image class='list_main_coinImg' src="/static/pages/me/coin.png" mode="aspectFit"></image>
+								<text>{{ item.afterDiscountPrice }} 角本币</text>
+							</view> -->
+						</view>
+					</view>
+				</view>
 			</view>
 			
-			<view class="index_list_main">
-				<view class="index_list_main_header">
-					<view class="index_list_title">
-						<image class="title_img" src="../../static/pages/椭圆形.png" mode="aspectFit"></image>
-						<text>打折活动</text>
-					</view>
-					<navigator class="more_text" url="../category/category">
-						<text>更多</text>
-						<image class="more_img" src="../../static/pages/download01.png" mode="aspectFit"></image>
-					</navigator>
-				</view>
-				<view class="index_list_main_content">
-					<view class="index_list_main_item" v-for="item in recommendList" :key="item.id">
-						<image class="index_list_main_img" :src="item.imgUrl" mode="aspectFill"></image>
-						<text class="index_list_main_text">{{ item.name }}</text>
-						<text class="index_type">{{ item.type }}</text>
-						<view class="index_list_main_text index_list_main_price">
-							<image class='coin_img' src="../../static/pages/coin2.png" mode="aspectFit"></image>
-							<text>{{ item.price }}</text>
+			<!-- 打榜-->
+			<!-- <view style="width: 100%;height: 350rpx;">
+				<image style="width: 100%;height: 100%;" src="../../static/pages/picture/advertisement.png" mode="aspectFit"></image>
+			</view> -->
+			
+			<view class="index_list_main" v-if="list.discountTenantList && list.discountTenantList.length > 0 ">
+				<home-line-title title="打折活动" linkUrl="./tenantAll?type=3"></home-line-title>
+				<view class="list_main_content">
+					<view class="list_main_item" v-for="(item,index) in list.discountTenantList" :key="index" @click="getstarDetails(item)">
+						<image class="list_main_img" :src="item.thumbnailUrl" mode="aspectFill"></image>
+						<view class="list_main_text">
+							<view class="list_main_name">{{ item.realName }}</view>
+							<view class="goodsTypeHidden">
+								<text class="list_main_type" v-for="(i,ind) in item.tenantTypeList" :key="ind">{{i.tenantTypeName}}</text>
+							</view>
+							<!-- <view class="list_main_price">
+								<image class='list_main_coinImg' src="../../static/pages/me/coin.png" mode="aspectFit"></image>
+								<text>{{ item.afterDiscountPrice }} 角本币</text>
+							</view> -->
 						</view>
 					</view>
 				</view>
 			</view>
-			<view class="index_list_main">
-				<view class="index_list_main_header">
-					<view class="index_list_title">
-						<image class="title_img" src="../../static/pages/椭圆形.png" mode="aspectFit"></image>
-						<text>最新签约</text>
-					</view>
-					<navigator class="more_text" url="../category/category">
-						<text>更多</text>
-						<image class="more_img" src="../../static/pages/download01.png" mode="aspectFit"></image>
-					</navigator>
-				</view>
-				<view class="index_list_main_content">
-					<view class="index_list_main_item" v-for="item in recommendList" :key="item.id">
-						<image class="index_list_main_img" :src="item.imgUrl" mode="aspectFill"></image>
-						<text class="index_list_main_text">{{ item.name }}</text>
-						<text class="index_type">{{ item.type }}</text>
-						<view class="index_list_main_text index_list_main_price">
-							<image class='coin_img' src="../../static/pages/coin2.png" mode="aspectFit"></image>
-							<text>{{ item.price }}</text>
+			<view class="index_list_main"  v-if="list.newTenantList && list.newTenantList.length > 0 ">
+				<home-line-title title="最新签约" linkUrl="./tenantAll?type=4"></home-line-title>
+				<view class="list_main_content">
+					<view class="list_main_item" v-for="(item,index) in list.newTenantList" :key="index" @click="getstarDetails(item)">
+						<image class="list_main_img" :src="item.thumbnailUrl" mode="aspectFill"></image>
+						<view class="list_main_text">
+							<view class="list_main_name">{{ item.realName }}</view>
+							<view class="goodsTypeHidden">
+								<text class="list_main_type" v-for="(i,ind) in item.tenantTypeList" :key="ind">{{i.tenantTypeName}}</text>
+							</view>
+							<!-- <view class="list_main_price">
+								<image class='list_main_coinImg' src="/static/pages/me/coin.png" mode="aspectFit"></image>
+								<text>{{ item.afterDiscountPrice }} 角本币</text>
+							</view> -->
 						</view>
 					</view>
 				</view>
 			</view>
-		</scroll-view>
+			<block v-if="list.customTagList && list.customTagList.length > 0 " >
+				<view class="index_list_main" v-if="cl.tenantList && cl.tenantList.length > 0 " v-for="(cl,indexl) in  list.customTagList" :key="indexl">
+					<home-line-title :title="cl.tenantTypeName" openType="reLaunch" :linkUrl="'../category/index?id='+cl.tenantTypeId"></home-line-title>
+					<view class="list_main_content">
+						<view class="list_main_item" v-for="(item,index) in cl.tenantList" :key="index" @click="getstarDetails(item)">
+							<image class="list_main_img" :src="item.thumbnailUrl" mode="aspectFill"></image>
+							<view class="list_main_text">
+								<view class="list_main_name">{{ item.realName }}</view>
+								<view class="goodsTypeHidden">
+									<text class="list_main_type" v-for="(i,ind) in item.tenantTypeList" :key="ind">{{i.tenantTypeName}}</text>
+								</view>
+								<!-- <view class="list_main_price">
+									<image class='list_main_coinImg' src="/static/pages/me/coin.png" mode="aspectFit"></image>
+									<text>{{ item.afterDiscountPrice }} 角本币</text>
+								</view> -->
+							</view>
+						</view>
+					</view>
+				</view>
+			</block>
+		</view>
 	</view>
 </template>
 
 <script>
-	import HNavigationBar from '../components/hNavigationBar'
-	import classBar from '../components/classBar'
-	import RHeader from '../components/rheader.vue'
+	import HNavigationBar from '@/components/hNavigationBar/index.vue'
+	import HomeLineTitle from '@/components/HomeLineTitle/HomeLineTitle.vue'
+	import classBar from '@/components/classBar'
+	import RHeader from '@/components/rheader.vue'
+	import { getHomeList } from '@/api/home.js'
 	export default {
 		components: {
 			RHeader,
 			HNavigationBar,
+			HomeLineTitle,
 			classBar
 		},
 		data() {
 			return {
-				background: [
-					{
-						name: 'A',
-						bgColor: '#1AAD19'
-					},
-					{
-						name: 'B',
-						bgColor: '#2782D7'
-					},
-					{
-						name: 'C',
-						bgColor: 'orange'
-					}
-				],
+				list:[],
 				indicatorDots: true,
 				autoplay: true,
 				interval: 2000,
 				duration: 500,
-				recommendList: [
-					{
-						'id': 1,
-						'name': '明星名字',
-						'price': '310000',
-						'type': '影视明星',
-						'imgUrl': '../../static/pages/mingxing.png'
-					},
-					{
-						'id': 2,
-						'name': '明星名字',
-						'price': '1000000',
-						'type': '体育明星',
-						'imgUrl': '../../static/pages/mingxing.png'
-					},
-					{
-						'id': 3,
-						'name': '明星名字',
-						'price': '30000',
-						'type': '脱口秀明星',
-						'imgUrl': '../../static/pages/mingxing.png'
-					}
-				]
 			}
 		},
-		// mounted() {
-		// 	this.showLogo = true
-		// },
+		onLoad(){
+			// this.getHomeList()
+		},
+		onShow:function(){
+			this.getHomeList()
+		},
+		onShareAppMessage:function(){
+			return {
+				title:'快来红角本，让喜欢的明星为你制作属于你的视频祝福吧',
+				path:'/pages/index/index',
+				imageUrl:'/static/pages/indexshare.png'
+			}
+		},
 		methods: {
-			upper() {
-				console.log('upper')
+			getHomeList(){
+				getHomeList().then(res=>{
+					console.log(res)
+					this.list = res.data.data || []
+				})
 			},
-			lower() {
-				console.log('lower')
+			getstarDetails(item){
+				uni.navigateTo({
+				 url:'/pages/index/starDetails?id=' + item.id
+				})
 			},
-			scroll() {
-				console.log('scroll')
-			},
-			changeIndicatorDots(e) {
-				this.indicatorDots = !this.indicatorDots
-			},
-			changeAutoplay(e) {
-				this.autoplay = !this.autoplay
-			},
-			intervalChange(e) {
-				this.interval = e.detail.value
-			},
-			durationChange(e) {
-				this.duration = e.detail.value
+			goBannerInfo(item){
+				if(!item.url){
+					return
+				}
+				uni.navigateTo({
+					url:'../public/webview?hrefUrl='+item.url
+				})
 			}
 		}
 	}
 </script>
 
-<style>
+<style scoped>
+	@import url('../../common/queryData.css');
+	page{
+		background-color: #FFFFFF;
+	}
 	::-webkit-scrollbar {
 		width: 0;
 		height: 0;
@@ -204,9 +186,19 @@
 		display: none;
 		background: transparent;
 	}
+	/*#ifdef H5 */
 	.index_main {
-		height: 100%;
+		padding-bottom: 120rpx;
+		background-color: #FFFFFF;
 	}
+	/* #endif */
+	/*#ifdef MP */
+	.index_main {
+		/* margin-bottom: 120rpx; */
+		background-color: #FFFFFF;
+	}
+	/* #endif */
+	
 	.uni-margin-wrap {
 		margin: 0 auto;
 		width:730rpx;
@@ -217,6 +209,7 @@
 	.swiper-item {
 		display: block;
 		height: 300rpx;
+		width: 100%;
 		line-height: 300rpx;
 		text-align: center;
 		border-radius: 10px;
@@ -224,81 +217,41 @@
 	.index_list_wrap {
 		width: 100%;
 		min-height: calc(100% - 60px);
+		background-color: #FFFFFF;
 	}
 	.index_list_main {
 		width: 100%;
 		padding: 40rpx;
 		box-sizing: border-box;
 	}
-	.index_list_main_header {
-		width: 100%;
-		height: 60rpx;
-		line-height: 60rpx;
-		font-size: 40rpx;
-		display: flex;
-		justify-content: space-between;
+	.popularStars{
+		position: relative;
 	}
-	.index_list_main_content {
+	.popularStarsTagimg{
+		width: 49rpx;
+		height: 62rpx;
+		position: absolute;
+		left: 10rpx;top: 30rpx;
+	}
+	.popularStarsBottomText{
 		width: 100%;
+		height: auto;
+		position: absolute;
+		left: 10rpx;bottom: 40rpx;
+		color: #FFFFFF;
+	}
+	.popularStarsPrice{
+		margin-right: 20rpx;
+		color: #FFFFFF;
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
-	}
-	.index_list_main_item {
-		flex: 0 0 30%;
-		display: flex;
-		flex-direction: column;
-		/* align-items: center; */
-		padding: 30rpx 0;
-		box-sizing: border-box;
-		font-size: 32rpx;
-		overflow: hidden;
-	}
-	.index_list_main_img {
-		width: 100%;
-		height: 300rpx;
-	}
-	.index_list_main_text {
-		margin: 10rpx 0;
-		width: 100%;
-		height: 42rpx;
-		white-space:nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
-	.index_list_main_price {
-		font-size: 24rpx;
-		color:#666666;
-		display: flex;
-		align-items: center;
-	}
-	.more_text {
-		font-size: 30rpx;
-		color:#808080;
-	}
-	.index_list_title {
-		display: flex;
-		align-items: center;
-	}
-	.title_img {
-		width: 40rpx;
-		height: 40rpx;
-		margin-right: 10rpx;
-	}
-	.more_img {
-		width: 20rpx;
-		height: 20rpx;
-		margin-left: 10rpx;
-	}
-	.coin_img {
-		width: 40rpx;
-		height: 40rpx;
-		margin-right: 10rpx;
+		justify-content:space-between;
 	}
 	
-	.index_type {
-		text-align: left;
-		font-size: 24rpx;
-		color: #808080;
+	/* 类型多出...隐藏 */
+	.goodsTypeHidden{
+		overflow:hidden;
+		text-overflow:ellipsis;
+		white-space:nowrap;
 	}
 </style>

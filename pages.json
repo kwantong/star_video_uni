@@ -1,43 +1,206 @@
 {
 	"pages": [
 		{
-			"path": "pages/index/index"//,
-			// "style": {
-			// 	"navigationBarTitleText": "首页"
-			// }
-		}
-		,
-		{
-		    "path" : "pages/category/index",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "",
+			"path": "pages/index/index",
+		    "style" : {
+		        "navigationBarTitleText": "首页",
 		        "enablePullDownRefresh": false
 		    }
-		    
-		},
-		
-		{
-			"path" : "pages/userCenter/userCenter"//,
-			// "style" :                                                                                    
-			// {
-			// 	"navigationBarTitleText": "个人中心",
-			// 	"enablePullDownRefresh": false
-			// }
-			
 		},
 		{
-			"path": "pages/searchRes/searchRes"
+		    "path" : "pages/category/index",
+		    "style" : {
+		        "navigationBarTitleText": "全部分类",
+		        "enablePullDownRefresh": false
+		    }
+		},
+		{
+			"path" : "pages/me/userCenter/userCenter",
+			"style" : {
+			    "navigationBarTitleText": "个人中心",
+			    "enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/searchRes/searchRes",
+			"style" : {
+			    "navigationBarTitleText": "搜索页面",
+			    "enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/index/tenantAll",
+			"style" : {
+			    "navigationBarTitleText": "更多明星",
+			    "enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/index/starDetails",
+			"style" : {
+			    "navigationBarTitleText": "明星详情",
+			    "enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/index/videoAll",
+			"style" : {
+			    "navigationBarTitleText": "明星视频",
+			    "enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/index/commentList",
+			"style" : {
+			    "navigationBarTitleText": "评论列表",
+			    "enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/index/orderfilling",
+			"style" : {
+			    "navigationBarTitleText": "订单填写",
+			    "enablePullDownRefresh": false
+			}
 		}
+        ,{
+            "path" : "pages/public/login",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "登录",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/public/regist-info",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "填写个人信息",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/public/regist-success",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "注册成功",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/me/userInfo/userInfo",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "个人信息",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/me/myOrder/myOrder",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "订单中心",
+                "enablePullDownRefresh": true
+            }
+        }
+        ,{
+            "path" : "pages/me/myOrder/order-result",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "下单成功",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/me/recharge/recharge",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "充值",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/me/recharge/rechargeList",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "充值记录",
+                "enablePullDownRefresh": true
+            }
+            
+        }
+        ,{
+            "path" : "pages/me/myCollect/myCollect",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "收藏",
+                "enablePullDownRefresh": true
+            }
+            
+        }
+        ,{
+            "path" : "pages/public/webview",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "红角本",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "default",
+				"navigationBarBackgroundColor": "#FFFFFF"
+            }
+        }
+        ,{
+            "path" : "pages/me/recharge/recharge-result",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "充值结果",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/me/userInfo/updateEmail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "修改邮箱",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/public/forgetPassword",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "忘记密码",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/me/userInfo/updatePhone",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "修改手机号",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/me/myOrder/orderDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "订单详情",
+                "enablePullDownRefresh": false
+            }
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationStyle":"custom",
-		// "usingComponents": {
-		// 	"mp-navigation-bar": "../../components/navigationBar/navigationBar"
-		// },
-		// "navigationBarTitleText": "红脚本",
-		// "navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8",
 		"app-plus": {
 			"background": "#efeff4"
@@ -46,24 +209,35 @@
 	"tabBar": {
 		"color":"#000000",
 		"selectedColor": "#FF2E81",
+		"backgroundColor":"#FFFFFF",
 		"list": [
 			{
 				"pagePath": "pages/index/index",
 				"text": "首页",
-				"iconPath": "static/pages/index.png",
-				"selectedIconPath": "static/pages/indexSelected.png"
+				"iconPath": "static/tabs/index.png",
+				"selectedIconPath": "static/tabs/indexSelected.png"
 			},
 			{
 				"pagePath": "pages/category/index",
 				"text": "明星分类",
-				"iconPath": "static/pages/category.png",
-				"selectedIconPath": "static/pages/categorySelected.png"
+				"iconPath": "static/tabs/category.png",
+				"selectedIconPath": "static/tabs/categorySelected.png"
 			},
 			{
-				"pagePath": "pages/userCenter/userCenter",
+				"pagePath": "pages/me/userCenter/userCenter",
 				"text": "个人中心",
-				"iconPath": "static/pages/userCenter.png",
-				"selectedIconPath": "static/pages/userCenterSelected.png"
+				"iconPath": "static/tabs/userCenter.png",
+				"selectedIconPath": "static/tabs/userCenterSelected.png"
+			}
+		]
+	},
+	"condition" : { //模式配置，仅开发期间生效
+		"current": 0, //当前激活的模式(list 的索引项)
+		"list": [
+			{
+				"name": "", //模式名称
+				"path": "", //启动页面，必选
+				"query": "" //启动参数，在页面的onLoad函数里面得到
 			}
 		]
 	}

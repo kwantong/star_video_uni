@@ -1,5 +1,5 @@
 {
-    "name" : "my-uni",
+    "name" : "红角本",
     "appid" : "__UNI__07DC3A9",
     "description" : "",
     "versionName" : "1.0.0",
@@ -49,10 +49,21 @@
     /* 快应用特有相关 */
     "mp-weixin" : {
         /* 小程序特有相关 */
-        "appid" : "wxa297857107b750b7",
+        "appid" : "wx4fc176380382eaae",
         "setting" : {
             "urlCheck" : false
         },
         "usingComponents" : true
+    },
+    "h5" : {
+        "title" : "红角本",
+        "router" : {
+            "base" : "/m/"
+        },
+        "devServer" : {
+            "disableHostCheck" : true
+        },
+        "template" : "index.html",
+        "domain" : "https://hongjiaoben.com"
     }
 }

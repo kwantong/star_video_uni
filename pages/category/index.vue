@@ -1,176 +1,203 @@
 <template>
-	<view style="height:100%">
-		<h-navigation-bar :showLogo="false" :title="title"  />
+	<view class="container">
+		<h-navigation-bar class="head-bar" :showBack="false" title="全部分类" background-color="#FFFFFF"/>
 		
 		<view class="topWrap" v-if="!cateStyle">
 			<view class="initCategoryStyle">
-				<view :class='[ item.id === selectedId ? "selected": "" , "cateItem"]' v-for="item in cateList" :key="item.id" @click="changeSelectCate(item.id)">
-					{{item.name}}
+				<view class="cateItem" v-if="index < 10" :class="{selected: item.simpleId === queryData.tenantTypeId }" v-for="(item,index) in simpleAll" :key="index" @click="changeSelectCate(item.simpleId)">
+					{{item.tenantTypeName}}
 				</view>
 			</view>
-			<view class="">
-				<button type="default" @click="openCateStyle">展开更多</button>
+			<view class="line" v-if="simpleAll && simpleAll.length > 10"></view>
+			<view style="background-color: #F8F7F6;" v-if="simpleAll && simpleAll.length > 10">
+				<view class="see-more" type="default" @click="openCateStyle">查看更多</view>
 			</view>
 		</view>
-		<view class="topWrap" v-else>
-			<view class="initCategoryStyle expandCate">
-				<view :class='[ item.id === selectedId ? "selected": "" , "cateItem"]' v-for="item in cateList" :key="item.id" @click="changeSelectCate(item.id)">
-					{{item.name}}
+		<view class="topWrap" style="position: relative;" v-else>
+			<view class="initCategoryStyle expandCate" style="background:#FFFFFF ;">
+				<view class="cateItem" :class="{selected:item.simpleId === queryData.tenantTypeId}" v-for="(item,index) in simpleAll" :key="index" @click="changeSelectCate(item.simpleId)">
+					{{item.tenantTypeName}}
 				</view>
 			</view>
-			<view class="">
-				<button type="default" @click="closeCateStyle">收起</button>
-			</view>
+			<view class="line"></view>
+			<view class="see-more" type="default" @click="closeCateStyle">收起</view>
 		</view>
+		<!-- 遮罩层 -->
+		<view v-if="cateStyle" style="width: 100vw;height: 100vh;background: rgba(0,0,0,0.5);position: fixed;top: 0;left: 0;z-index: 1;"></view>
 		
-		<view class="res_wrap">
-			<view class="res_tips">
-				<view>
-					<text>{{resName}}</text>
-				</view>
+		<!-- 查询结果 -->
+		<view>
+			<view class="category-title">
+				{{resName}}({{total}})
 			</view>
-			<scroll-view scroll-y="true" >
-				<z-paging ref="paging" @query="queryList" :list.sync="dataList">
-					<view class="res_list">
-						<view class="index_list_main_item" v-for="item in dataList" :key="item.id">
-							<image class="index_list_main_img" :src="item.imgUrl" mode="aspectFill"></image>
-							<text class="index_list_main_text">{{ item.name }}</text>
-							<text class="index_type">{{ item.type }}</text>
-							<view class="index_list_main_text index_list_main_price">
-								<image class='coin_img' src="../../static/pages/coin2.png" mode="aspectFit"></image>
-								<text>{{ item.price }}</text>
-							</view>
-						</view>
-					</view>
-				</z-paging>
-			</scroll-view>
+			<view class="tenant-list">
+				<tenant-info :tenantInfo="item" v-for="(item,index) in findPageList" :key="index"></tenant-info>
+			</view>
+			<empty v-if="!findPageList || findPageList.length === 0"></empty>
+			<uni-load-more v-if="findPageList && findPageList.length >= 0" :status="loadingType"></uni-load-more>
 		</view>
 	</view>
 </template>
 
 <script>
-	import hNavigationBar from '../components/hNavigationBar'
+	import hNavigationBar from '@/components/hNavigationBar'
+	import TenantInfo from '@/components/TenantInfo/TenantInfo.vue'
+	import empty from '@/components/empty/empty.vue'
+	import UniLoadMore from '@/components/uni-load-more/uni-load-more.vue'
+	import { tenantTypeSimpleAll,tenantTypefindPage } from '@/api/home.js'
 	export default {
 		components: {
-			hNavigationBar
+			hNavigationBar,empty,UniLoadMore,TenantInfo
 		},
 		data() {
 			return {
 				cateStyle: false,
-				resName: "影视明星（300）",
-				title: "全部分类",
+				resName: "全部",
 				selectedId: 0,
-				cateList: [
-					{
-						id: 0,
-						name: "影视明星"
-					},
-					{
-						id: 1,
-						name: "影视明星1"
-					},
-					{
-						id: 2,
-						name: "影视明星1"
-					},
-					{
-						id: 3,
-						name: "影视明星1"
-					},
-					{
-						id: 4,
-						name: "影视明星1"
-					},
-					{
-						id: 5,
-						name: "影视明星1"
-					},
-					{
-						id: 6,
-						name: "影视明星1"
-					},
-					{
-						id: 7,
-						name: "影视明星1"
-					},
-					{
-						id: 8,
-						name: "影视明星1"
-					},
-					{
-						id: 9,
-						name: "影视明星1"
-					},
-					{
-						id: 10,
-						name: "影视明星1"
-					}
-				]
-				,
-				dataList: [],
-				recommendList: [
-					{
-						'id': 1,
-						'name': '明星名字',
-						'price': '310000',
-						'type': '影视明星',
-						'imgUrl': '../../static/pages/mingxing.png'
-					},
-					{
-						'id': 2,
-						'name': '明星名字',
-						'price': '1000000',
-						'type': '体育明星',
-						'imgUrl': '../../static/pages/mingxing.png'
-					},
-					{
-						'id': 3,
-						'name': '明星名字',
-						'price': '30000',
-						'type': '脱口秀明星',
-						'imgUrl': '../../static/pages/mingxing.png'
-					}
-				]
+				
+				simpleAll:[],
+				queryData:{
+					pageNum:1,
+					pageSize:10,
+					tenantTypeId:''
+				},
+				findPageList:[],
+				total:0,
+				loadingType:'nomore',
 			}
+		},
+		computed:{
+			getTypeName(){
+				for (var i = 0; i < this.simpleAll.length; i++) {
+					const temp = this.simpleAll[i]
+					if(temp.id = this.queryData.tenantTypeId){
+						return temp.tenantTypeName ||'全部'
+					}
+				}
+				return '全部'
+			}
+		},
+		onLoad:function(options){
+			if(options.id != undefined){
+				this.queryData.tenantTypeId = options.id * 1
+			}else{
+				this.queryData.tenantTypeId = ''
+			}
+			this.getSimpleAll()
+			this.getfindPage('')
+			// this.changeSelectCate()
+		},
+		onPullDownRefresh:function(){
+			this.getfindPage('refresh')
+		},
+		onReachBottom:function(){
+			this.getfindPage('add')
 		},
 		methods: {
 			changeSelectCate (id) {
-				this.selectedId = id
-			},
-			queryList (pageNo, pageSize) {
-				console.log('分页请求')
-				console.log('页码：'+pageNo)
-				console.log('数量：'+pageSize)
-				setTimeout(() => {
-					this.dataList = this.recommendList
-				}, 500)
+				console.log('changeSelectCate-->',id)
+				this.queryData.tenantTypeId = id
+				this.queryData.pageNum = 1
+				this.getfindPage('')
 			},
 			openCateStyle () {
 				this.cateStyle = true
 			},
 			closeCateStyle () {
 				this.cateStyle = false
+			},
+			// 分类list
+			getSimpleAll(){
+				tenantTypeSimpleAll().then(res=>{
+					this.simpleAll = res.data.data || []
+					this.simpleAll.forEach(item=>{
+						item['simpleId'] = item.id
+					})
+					
+					const resObj = this.simpleAll.find(t => this.queryData.tenantTypeId == t.id) || {}
+					this.resName = resObj && resObj.tenantTypeName || '全部'
+				})
+			},
+			// 查询数据
+			getfindPage(type){
+				if(type === 'add'){
+					if(this.loadingType === 'nomore'){
+						return
+					}
+					this.loadingType = 'loading'
+					uni.showLoading({ title: '正在加载'})
+				}else if(type === 'refresh'){
+					this.queryData.pageNum = 1
+					this.findPageList = []
+					uni.showLoading({
+						title:'加载中'
+					})
+				}
+				const resObj = this.simpleAll.find(t => this.queryData.tenantTypeId == t.simpleId) || {}
+				this.resName = resObj && resObj.tenantTypeName || '全部'
+				
+				tenantTypefindPage(this.queryData).then(res=>{
+					const list = res.data.data.list || []
+					this.total = res.data.data.total
+					if(type=== 'add'){
+						this.findPageList = this.findPageList.concat(list)
+					}else{
+						this.findPageList = list
+					}
+					this.loadingType = res.data.data.total > this.findPageList.length ?'more':'nomore'
+					if(type === 'refresh'){
+						uni.stopPullDownRefresh()
+					}
+					this.queryData.pageNum = this.queryData.pageNum + 1
+				})
 			}
 		}
 	}
 </script>
 
-<style>
+<style scoped>
+@import url('../../common/queryData.css');
+/*#ifdef H5 */
+.container {
+	padding-bottom: 120rpx;
+}
+/* #endif */
+.category-title{
+	font-size: 36rpx;
+	font-family: PingFangTC-Regular, PingFangTC;
+	font-weight: 400;
+	color: #000000;
+	padding: 30rpx 0 0 30rpx;
+}
+.head-bar >>>  .nav{
+	position: relative;
+	z-index: 9999;
+}
+/* 分类 */
 .topWrap {
 	width: 100%;
 	position: relative;
 	z-index: 99999;
 	box-sizing: border-box;
 	background-color: #fff;
+	border-radius: 0 0 20rpx 20rpx;
+	overflow: hidden;
 }
 .initCategoryStyle {
 	width: 100%;
-	height: 120px;
+	height: 200rpx;
 	padding: 10px;
 	display: flex;
 	flex-wrap: wrap;
 	box-sizing: border-box;
 	overflow: hidden;
+}
+.see-more{
+	text-align: center;
+	padding: 30rpx 0;
+	font-size: 28rpx;
+	color: #FF2E80;
+	background-color: #FFFFFF;
 }
 .expandCate {
 	height: auto;
@@ -183,9 +210,9 @@
 	box-sizing: border-box;
 	text-align: center;
 	border-radius: 2px;
-	height: 40px;
+	height: 34px;
 	line-height: 30px;
-	padding: 5px;
+	padding: 2px 5px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space:nowrap
@@ -194,50 +221,5 @@
 	background-color: #FFDBE9;
 	border-radius: 2px;
 	color: #FF468E;
-}
-.res_list {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-}
-.index_list_main_item {
-	flex: 0 0 48%;
-	margin: 10rpx 1%;
-	display: flex;
-	flex-direction: column;
-	/* align-items: center; */
-	padding: 30rpx 0;
-	box-sizing: border-box;
-	font-size: 32rpx;
-	overflow: hidden;
-}
-.index_list_main_img {
-	width: 100%;
-	height: 300rpx;
-}
-.index_list_main_text {
-	margin: 10rpx 0;
-	width: 100%;
-	height: 42rpx;
-	white-space:nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-.index_list_main_price {
-	font-size: 24rpx;
-	color:#666666;
-	display: flex;
-	align-items: center;
-}
-.coin_img {
-	width: 40rpx;
-	height: 40rpx;
-	margin-right: 10rpx;
-}
-
-.index_type {
-	text-align: left;
-	font-size: 24rpx;
-	color: #808080;
 }
 </style>
