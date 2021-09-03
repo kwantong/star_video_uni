@@ -96,7 +96,7 @@
 	height: calc(90vw/3/2*3);
 }
 .list_main_text {
-	height: 80rpx;
+	height: 120rpx;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -121,7 +121,7 @@
 .list_main_price {
 	display: flex;
 	align-items: center;
-	font-size: 28rpx;
+	font-size: 24rpx;
 	color: #FF2E80;
 	font-weight: 400;
 	margin-top: 8rpx;

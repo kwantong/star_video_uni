@@ -22,10 +22,10 @@
 							<view class="goodsTypeHidden">
 								<text class="list_main_type" v-for="(i,ind) in item.tenantTypeList" :key="ind">{{i.tenantTypeName}}</text>
 							</view>
-							<!-- <view class="list_main_price">
+							<view class="list_main_price">
 								<image class='list_main_coinImg' src="/static/pages/me/coin.png" mode="aspectFit"></image>
 								<text>{{ item.afterDiscountPrice }} 角本币</text>
-							</view> -->
+							</view>
 						</view>
 					</view>
 				</view>
@@ -41,10 +41,10 @@
 							<view class="goodsTypeHidden">
 								<text class="list_main_type" v-for="(i,ind) in item.tenantTypeList" :key="ind">{{i.tenantTypeName}}</text>
 							</view>
-							<!-- <view class="list_main_price">
+							<view class="list_main_price">
 								<image class='list_main_coinImg' src="/static/pages/me/coin.png" mode="aspectFit"></image>
 								<text>{{ item.afterDiscountPrice }} 角本币</text>
-							</view> -->
+							</view>
 						</view>
 					</view>
 				</view>
@@ -65,10 +65,10 @@
 							<view class="goodsTypeHidden">
 								<text class="list_main_type" v-for="(i,ind) in item.tenantTypeList" :key="ind">{{i.tenantTypeName}}</text>
 							</view>
-							<!-- <view class="list_main_price">
+							<view class="list_main_price">
 								<image class='list_main_coinImg' src="../../static/pages/me/coin.png" mode="aspectFit"></image>
 								<text>{{ item.afterDiscountPrice }} 角本币</text>
-							</view> -->
+							</view>
 						</view>
 					</view>
 				</view>
@@ -83,10 +83,10 @@
 							<view class="goodsTypeHidden">
 								<text class="list_main_type" v-for="(i,ind) in item.tenantTypeList" :key="ind">{{i.tenantTypeName}}</text>
 							</view>
-							<!-- <view class="list_main_price">
+							<view class="list_main_price">
 								<image class='list_main_coinImg' src="/static/pages/me/coin.png" mode="aspectFit"></image>
 								<text>{{ item.afterDiscountPrice }} 角本币</text>
-							</view> -->
+							</view>
 						</view>
 					</view>
 				</view>
@@ -102,10 +102,10 @@
 								<view class="goodsTypeHidden">
 									<text class="list_main_type" v-for="(i,ind) in item.tenantTypeList" :key="ind">{{i.tenantTypeName}}</text>
 								</view>
-								<!-- <view class="list_main_price">
+								<view class="list_main_price">
 									<image class='list_main_coinImg' src="/static/pages/me/coin.png" mode="aspectFit"></image>
 									<text>{{ item.afterDiscountPrice }} 角本币</text>
-								</view> -->
+								</view>
 							</view>
 						</view>
 					</view>
@@ -167,7 +167,7 @@
 					return
 				}
 				uni.navigateTo({
-					url:'../public/webview?hrefUrl='+item.url
+					url:item.url
 				})
 			}
 		}
