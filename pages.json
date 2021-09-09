@@ -197,6 +197,15 @@
                 "enablePullDownRefresh": false
             }
         }
+        ,{
+            "path" : "pages/businessOrder/index/index",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
