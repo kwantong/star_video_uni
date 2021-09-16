@@ -19,10 +19,10 @@
 			</view>
 			
 			<view v-if="orderShow">
-				<view style="margin:30rpx 30rpx 25rpx">此视频录制给</view>
+				<view style="margin:30rpx 30rpx 25rpx">填写订单内容</view>
 			
 				<view class="form-item">
-					<view class="item-label required">用户名</view>
+					<view class="item-label required">此视频录制给</view>
 					<view class="item-value">
 						<label class="radio-item" @click="changeUser(0)" style="margin-right: 30rpx;">
 							<radio value="0" checked="true" color="#FF2E80" :checked="createOrderFrom.videoGiftType === 0" style="transform:scale(0.7)"/>

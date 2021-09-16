@@ -69,7 +69,7 @@
 <script>
 	import HNavigationBar from '@/components/hNavigationBar/index.vue'
 	import { videoAllPurpose } from '@/api/home.js'
-	import { orderDetail } from '@/api/order.js'
+	import { orderDetail, cancelUserOrder } from '@/api/order.js'
 	export default {
 		components:{
 			HNavigationBar
@@ -139,7 +139,7 @@
 				this.videoDialogueVisible = false
 			},
 			cancelOrder(){
-				const order  = this.orderInfo
+				// const order = this.orderInfo
 				uni.showModal({
 					title: '',
 					content: '确定要取消订单？',
@@ -149,7 +149,7 @@
 					confirmColor: '#FF2E80',
 					success: res => {
 						if(res.confirm){
-							cancelUserOrder({orderSn:order.orderSn,note:'用户取消'}).then(res=>{
+							cancelUserOrder({orderSn:this.orderInfo.orderSn,note:'用户取消'}).then(res=>{
 								this.$api.msg('取消成功')
 								this.queryData('refresh')
 							})
