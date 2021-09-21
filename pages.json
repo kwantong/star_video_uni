@@ -201,8 +201,16 @@
             "path" : "pages/businessOrder/index/index",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "商务需求",
                 "enablePullDownRefresh": false
+            }
+            
+        },{
+            "path" : "pages/csChat/index/index",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "在线客服",
+                "enablePullDownRefresh": true
             }
             
         }

@@ -13,7 +13,7 @@ const whiteCodes = [1005001,1005002,1004004]
 http.setConfig((config) => { /* config 为默认全局配置*/
 	config.baseURL = domain /* 根域名 */
 	config.custom = {
-		loading: true, // 默认有loading  
+		loading: false, // 默认没有loading  
 	}
 	return config
 })

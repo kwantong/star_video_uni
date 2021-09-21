@@ -86,6 +86,11 @@
 						name:'商务需求'
 					},
 					{
+						icon:'/static/pages/me/order.png',
+						path:'/pages/csChat/index/index',
+						name:'在线客服'
+					},
+					{
 						icon:'',
 						path:'',
 						name:'邀请码：',
