@@ -1,20 +1,21 @@
 <template>
     <div class="cs_chat_main">
-      <h-navigation-bar :showBack="true" :title="title" background-color="#FFFFFF"></h-navigation-bar>
+      <h-navigation-bar :showBack="true" title="在线客服" background-color="#FFFFFF"></h-navigation-bar>
       <view class="line"></view>
     <div class="cs_chat_container">
-            <div class="cs_chat_content">
+            <scroll-view class="cs_chat_content" scroll-y="true" :style="{'height':scrollViewH}" :scroll-top="scrollTop">
                 <div v-for="(item, index) in session.messages" :key="index">
-                    <div class="cs_chat_item item-center"><span>{{timestampToTime(item.created)}}</span></div>
+                    <div class="cs_chat_item item-center" v-if="item.showCreated"><span>{{timestampToTime(item.created)}}</span></div>
                     <div class="cs_chat_item item-right" v-if="item.isSelf == 1"><div class="cs_chat_bubble bubble-right">{{item.text}}</div><div class="cs_chat_avatar"><img :src="session.avatar" /></div></div>
                     <div class="cs_chat_item item-left" v-if="item.isSelf == 0"><div class="cs_chat_avatar"><img :src="session.csAvatar" /></div><div class="cs_chat_bubble bubble-left">{{item.text}}</div></div>
                 </div>
-            </div>
+            </scroll-view>
             <div class="cs_chat_input-area">
-                <textarea name="text" id="textarea" v-model="newMessage"></textarea>
+                <textarea name="text" id="textarea" v-model="newMessage" placeholder="请输入您的问题或留言"></textarea>
                 <div class="cs_chat_button-area">
                     <button id="send-btn" @click="postMessage()">发 送</button>
                 </div>
+				<div style="color:#FF2E80;font-size:13px;padding:16px;">我们会在第一时间做出解答，请您耐心等待。您可以暂时离开本页面，稍后再回来查看回复内容。</div>
             </div>
         </div>
     </div>
@@ -37,16 +38,29 @@ export default {
         newMessage: '',
         lastUpdated: 0,
         isLoading: false,
+		scrollViewH: '',
+		scrollTop: 0,
     }
   },
 
   created() {
-      this.getCsChatList()
+      this.getCsChatList(true)
       this.reloadInterval()
+  },
+  
+  mounted() {
+	  let that = this;
+	  const query = uni.createSelectorQuery().in(this);
+	  query.select('.cs_chat_content').boundingClientRect();
+	  query.exec(res => {
+		  const scrollViewH = res[0].height;
+		  console.log("scrollViewH==" + scrollViewH)
+		  that.scrollViewH = scrollViewH + "px"
+	  });
   },
 
   methods: {
-      getCsChatList() {
+      getCsChatList(scrollToBottom) {
           if(this.isLoading) {
               return
           }
@@ -60,8 +74,9 @@ export default {
                   this.lastUpdated = res.data.data.messages[length-1].created
               }
               this.isLoading = false
-              this.scrollToBottom()
-			  
+			  if(scrollToBottom) {
+				  this.scrollToBottom()
+			  }
             }
           )
       },
@@ -72,18 +87,18 @@ export default {
           postMessage(this.newMessage).then(
               res => {
                   this.newMessage = ''
-                  this.getCsChatList()
+                  this.getCsChatList(true)
               }
           )
       },
       reloadInterval() {
-          setInterval(this.getCsChatList, 10000);
+          setInterval(this.getCsChatList(false), 10000);
       },
       scrollToBottom() {
-        this.$nextTick(() => {
-            var container = this.$el.querySelector(".cs_chat_content");
-            container.scrollTop = container.scrollHeight;
-        })
+        let that = this;
+		setTimeout(function(){
+		     that.scrollTop = 99999 + Math.random() * 10;
+		},200);
      },
      timestampToTime(timestamp){
         const date = new Date(timestamp);
@@ -104,12 +119,13 @@ export default {
 
 <style>
     .cs_chat_main{
-        margin-top: 20px;
-        margin-bottom: 20px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+		height: 100vh;
     }
 
  .cs_chat_container{
-    height: 85vh;
+    height: calc(100vh - 46px);
     width: 98%;
     border-radius: 4px;
     border: 0.5px solid #e0e0e0;
@@ -198,7 +214,7 @@ export default {
 }
 .cs_chat_input-area{
     border-top:0.5px solid #e0e0e0;
-    height: 100px;
+    height: 180px;
     display: flex;
     flex-flow: column;
     background-color: #fff;

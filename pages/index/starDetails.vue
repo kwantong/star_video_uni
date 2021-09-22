@@ -1,6 +1,6 @@
 <template>
 	<scroll-view class="container" :style="'height: '+scrollHeight+'px;'" scroll-y="true" @scroll="watchShopContent">
-		<h-navigation-bar :class="{'navigation-bar':scrollTop < 30,'navigation-bar-fixed':scrollTop >= 30}" :backgroundColor="scrollTop >= 30?'#FFFFFF':''" :showBack="true" title="明星详情"/>
+		<h-navigation-bar :class="{'navigation-bar':scrollTop < 1,'navigation-bar-fixed':scrollTop >= 1}" :backgroundColor="scrollTop >= 30?'#FFFFFF':''" :showBack="true" title="明星详情"/>
 		<!-- 图片 -->
 		<view class="detail-introduce">
 			<video @error="onVideoLoadError" v-if="detailsData.verificationVideoUrl && !videoLoadError" :src="detailsData.verificationVideoUrl" controls :poster="detailsData.videoThumbnailUrl"></video>
@@ -28,6 +28,11 @@
 				<view v-for="(item,index) in detailsData.tenantTypeList" :key="index" style="margin-left: 1.3%;font-size: 24rpx;color: #999999;">
 					{{item.tenantTypeName}}
 				</view>
+			</view>
+			<view class="Starlabel">
+				<navigator hover-class="none" url="/pages/csChat/index/index">
+					<text style="color:#FF3636;font-size: 28rpx;">在线客服</text>
+				</navigator>
 			</view>
 			<view class="StarDynamic">
 				<view style="left: 4%;top: 20rpx;position: absolute;">
