@@ -44,7 +44,7 @@ export default {
   },
 
   created() {
-      this.getCsChatList(true)
+      this.getCsChatList()
       this.reloadInterval()
   },
   
@@ -60,7 +60,7 @@ export default {
   },
 
   methods: {
-      getCsChatList(scrollToBottom) {
+      getCsChatList() {
           if(this.isLoading) {
               return
           }
@@ -72,11 +72,9 @@ export default {
               if(res.data.data && res.data.data.messages.length > 0){
                   var length = res.data.data.messages.length
                   this.lastUpdated = res.data.data.messages[length-1].created
+				  this.scrollToBottom()
               }
               this.isLoading = false
-			  if(scrollToBottom) {
-				  this.scrollToBottom()
-			  }
             }
           )
       },
@@ -87,12 +85,12 @@ export default {
           postMessage(this.newMessage).then(
               res => {
                   this.newMessage = ''
-                  this.getCsChatList(true)
+                  this.getCsChatList()
               }
           )
       },
       reloadInterval() {
-          setInterval(this.getCsChatList(false), 10000);
+          setInterval(this.getCsChatList, 10000);
       },
       scrollToBottom() {
         let that = this;
