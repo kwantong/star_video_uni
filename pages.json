@@ -206,11 +206,28 @@
             }
             
         },{
+            "path" : "pages/me/contactUs/index/index",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "联系我们",
+                "enablePullDownRefresh": false
+            }
+            
+        },{
             "path" : "pages/csChat/index/index",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "在线客服",
                 "enablePullDownRefresh": true
+            }
+            
+        }
+        ,{
+            "path" : "pages/me/contactUs/index/index",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
             }
             
         }

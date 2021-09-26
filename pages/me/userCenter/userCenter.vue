@@ -81,14 +81,19 @@
 						name:'充值记录'
 					},
 					{
-						icon:'/static/pages/me/order.png',
+						icon:'/static/pages/me/businessOrder.png',
 						path:'/pages/businessOrder/index/index',
 						name:'商务需求'
 					},
 					{
-						icon:'/static/pages/me/order.png',
+						icon:'/static/pages/me/contact.png',
 						path:'/pages/csChat/index/index',
 						name:'在线客服'
+					},
+					{
+						icon:'/static/pages/me/contactUs.png',
+						path:'/pages/me/contactUs/index/index',
+						name:'联系我们'
 					},
 					{
 						icon:'',
