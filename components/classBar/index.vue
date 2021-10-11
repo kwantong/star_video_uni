@@ -2,7 +2,7 @@
 	<view class="index_nav">
 		<scroll-view scroll-x="true" scroll-left="120" class="index_nav_scroll">
 			<view class="index_nav_item" v-for="(item,index) in allTenantType" :key="index" @click="goClassPage(item)">
-				<text>{{item.tenantTypeName}} ({{item.tenantCount}})</text>
+				<text>{{item.tenantTypeName}} <!-- ({{item.tenantCount}}) --></text>
 			</view>
 		</scroll-view>
 	</view>

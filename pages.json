@@ -222,15 +222,6 @@
             }
             
         }
-        ,{
-            "path" : "pages/me/contactUs/index/index",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

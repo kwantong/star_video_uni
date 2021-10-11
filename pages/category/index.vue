@@ -28,7 +28,7 @@
 		<!-- 查询结果 -->
 		<view>
 			<view class="category-title">
-				{{resName}}({{total}})
+				{{resName}}<!--({{total}})-->
 			</view>
 			<view class="tenant-list">
 				<tenant-info :tenantInfo="item" v-for="(item,index) in findPageList" :key="index"></tenant-info>
