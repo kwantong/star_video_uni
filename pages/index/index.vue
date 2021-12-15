@@ -11,12 +11,11 @@
 				</swiper>
 			</view>
 			<class-bar />
-			<view class="index_list_main" v-if="list.hotTenantList && list.hotTenantList.length > 0 ">
-				<home-line-title title="人气明星" linkUrl="./tenantAll?type=1"></home-line-title>
+			<view class="index_list_main" v-if="list.recommendTenantList && list.recommendTenantList.length > 0 ">
+				<home-line-title title="推荐艺人" linkUrl="./tenantAll?type=2"></home-line-title>
 				<view class="list_main_content">
-					<view class="list_main_item popularStars" v-for="(item,index) in list.hotTenantList" :key="index" @click="getstarDetails(item)">
+					<view class="list_main_item" v-for="(item,index) in list.recommendTenantList" :key="index" @click="getstarDetails(item)">
 						<image class="list_main_img" :src="item.thumbnailUrl" mode="aspectFill"></image>
-						<image class="popularStarsTagimg" src="../../static/pages/picture/popularStar.png" mode="aspectFill"></image>
 						<view class="list_main_text">
 							<view class="list_main_name">{{ item.realName }}</view>
 							<view class="goodsTypeHidden">
@@ -31,11 +30,12 @@
 				</view>
 			</view>
 			
-			<view class="index_list_main" v-if="list.recommendTenantList && list.recommendTenantList.length > 0 ">
-				<home-line-title title="推荐艺人" linkUrl="./tenantAll?type=2"></home-line-title>
+			<view class="index_list_main" v-if="list.hotTenantList && list.hotTenantList.length > 0 ">
+				<home-line-title title="人气明星" linkUrl="./tenantAll?type=1"></home-line-title>
 				<view class="list_main_content">
-					<view class="list_main_item" v-for="(item,index) in list.recommendTenantList" :key="index" @click="getstarDetails(item)">
+					<view class="list_main_item popularStars" v-for="(item,index) in list.hotTenantList" :key="index" @click="getstarDetails(item)">
 						<image class="list_main_img" :src="item.thumbnailUrl" mode="aspectFill"></image>
+						<image class="popularStarsTagimg" src="../../static/pages/picture/popularStar.png" mode="aspectFill"></image>
 						<view class="list_main_text">
 							<view class="list_main_name">{{ item.realName }}</view>
 							<view class="goodsTypeHidden">
@@ -133,7 +133,7 @@
 				list:[],
 				indicatorDots: true,
 				autoplay: true,
-				interval: 2000,
+				interval: 5000,
 				duration: 500,
 			}
 		},

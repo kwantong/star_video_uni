@@ -1,5 +1,6 @@
 <template>
-	<scroll-view class="container" :style="'height: '+scrollHeight+'px;'" scroll-y="true" @scroll="watchShopContent">
+	<view style="min-height:100%;">
+	<!-- <scroll-view class="container" :style="'height: '+scrollHeight+'px;'" scroll-y="true" @scroll="watchShopContent"> -->
 		<h-navigation-bar :class="{'navigation-bar':scrollTop < 1,'navigation-bar-fixed':scrollTop >= 1}" :backgroundColor="scrollTop >= 30?'#FFFFFF':''" :showBack="true" title="明星详情"/>
 		<!-- 图片 -->
 		<view class="detail-introduce">
@@ -64,8 +65,7 @@
 				</navigator>
 			</view> 
 			<view v-if="videoData.length != 0">
-				<scroll-view show-scrollbar="true" scroll-x="true" scroll-left="120" class="starVideo_scroll">
-					<view class="starVideo_item" v-for="(item,index) in videoData" :key="index">
+					<view class="starVideo_item" v-for="(item,index) in videoData.slice(0,2)" :key="index">
 						<view class="starVideo-video">
 							<video @loadedmetadata="function(e){videLoaded(e,index)}" :src="item.videoUrl" controls :poster="item.videoThumbnailUrl"></video>
 						</view>
@@ -80,7 +80,6 @@
 							</view>
 						</view>
 					</view>
-				</scroll-view>
 			</view>
 			<view v-else style="text-align: center;line-height: 200rpx;color: #B2B2B2;">暂无视频 </view>
 		</view>
@@ -171,7 +170,7 @@
 			<view class="line"></view>
 			<view class="cancel" @click="toggleShareFlag">取消</view>
 		</view>
-	</scroll-view>
+	</view>
 </template>
 
 <script>
@@ -198,7 +197,7 @@
 			}
 			//#endif
 			
-			//#ifdef H5
+			//#ifdef H5 || APP
 			this.detailsId = options.id
 			//#endif
 			

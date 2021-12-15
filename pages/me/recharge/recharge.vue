@@ -30,7 +30,7 @@
 				</view>
 				<radio :checked="rechargeType===1" color="#FF2E80"></radio>
 			</view>
-			<!-- #ifdef H5 -->
+			<!-- #ifdef H5 || APP -->
 			<view class="recharge-type-item" @click="chnageRechageType(2)">
 				<view class="recharge-type-item-info">
 					<image class="recharge-icon" src="/static/pages/recharge/alipay-recharge.png"></image>
@@ -150,7 +150,7 @@
 				});
 				// #endif
 				
-				// #ifdef H5
+				// #ifdef H5 || APP
 				uni.showLoading({
 					title:'支付中'
 				})

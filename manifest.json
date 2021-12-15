@@ -15,33 +15,65 @@
             "autoclose" : true,
             "delay" : 0
         },
-        "modules" : {},
+        "modules" : {
+            "Payment" : {},
+            "OAuth" : {}
+        },
         /* 模块配置 */
         "distribute" : {
             /* 应用发布信息 */
             "android" : {
                 /* android打包配置 */
                 "permissions" : [
-                    "<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
-                    "<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>",
-                    "<uses-permission android:name=\"android.permission.VIBRATE\"/>",
-                    "<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
-                    "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
-                    "<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
-                    "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
-                    "<uses-permission android:name=\"android.permission.CAMERA\"/>",
-                    "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>",
-                    "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
-                    "<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>",
-                    "<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
-                    "<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
                     "<uses-feature android:name=\"android.hardware.camera\"/>",
+                    "<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.CAMERA\"/>",
+                    "<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
+                    "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>",
+                    "<uses-permission android:name=\"android.permission.INTERNET\"/>",
+                    "<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>",
+                    "<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>",
+                    "<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
+                    "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.VIBRATE\"/>",
+                    "<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
+                    "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>",
                     "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
-                ]
+                ],
+                "autoSdkPermissions" : false,
+                "abiFilters" : [ "armeabi-v7a", "arm64-v8a", "x86" ]
             },
             "ios" : {},
             /* ios打包配置 */
-            "sdkConfigs" : {}
+            "sdkConfigs" : {
+                "ad" : {},
+                "payment" : {
+                    "alipay" : {
+                        "__platform__" : [ "android" ]
+                    },
+                    "weixin" : {
+                        "__platform__" : [ "android" ],
+                        "appid" : "wx90c4ba7b5743c7ef",
+                        "UniversalLinks" : ""
+                    }
+                },
+                "oauth" : {
+                    "weixin" : {
+                        "appid" : "wx90c4ba7b5743c7ef",
+                        "appsecret" : "0d7743eb6a1ea5f50258eff9ef312312",
+                        "UniversalLinks" : ""
+                    },
+                    "qq" : {
+                        "appid" : "101957833",
+                        "UniversalLinks" : ""
+                    }
+                }
+            }
         }
     },
     /* SDK配置 */
