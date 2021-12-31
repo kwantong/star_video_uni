@@ -149,6 +149,7 @@
 						uni.stopPullDownRefresh()
 					}
 					this.queryData.pageNum = this.queryData.pageNum + 1
+					uni.hideLoading()
 				})
 			}
 		}

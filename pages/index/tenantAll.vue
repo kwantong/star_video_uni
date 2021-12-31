@@ -90,6 +90,7 @@
 						uni.stopPullDownRefresh()
 					}
 					this.queryData.pageNum = this.queryData.pageNum + 1
+					uni.hideLoading()
 				})
 			},
 			getfindRecommendList(type){
@@ -118,6 +119,7 @@
 						uni.stopPullDownRefresh()
 					}
 					this.queryData.pageNum = this.queryData.pageNum + 1
+					uni.hideLoading()
 				})
 			},
 			getfindDisCountList(type){
@@ -146,6 +148,7 @@
 						uni.stopPullDownRefresh()
 					}
 					this.queryData.pageNum = this.queryData.pageNum + 1
+					uni.hideLoading()
 				})
 			},
 			getfindNewList(type){
@@ -174,6 +177,7 @@
 						uni.stopPullDownRefresh()
 					}
 					this.queryData.pageNum = this.queryData.pageNum + 1
+					uni.hideLoading()
 				})
 			}
 		}

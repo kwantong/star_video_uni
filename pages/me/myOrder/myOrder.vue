@@ -123,6 +123,7 @@
 						uni.stopPullDownRefresh()
 					}
 					this.loadingType = res.data.data.total > this.orderList.length?'more':'nomre'
+					uni.hideLoading()
 				})
 			},
 			cancelOrder(order){

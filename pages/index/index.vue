@@ -1,6 +1,6 @@
 <template>
 	<view class="index_main">
-		<h-navigation-bar  :showLogo="true" titleAlign="left" background-color="#FFFFFF"></h-navigation-bar>
+		<h-navigation-bar  :showLogo="true" :showSearch="true" titleAlign="left" background-color="#FFFFFF"></h-navigation-bar>
 		<r-header></r-header>
 		<view>
 			<view class="uni-margin-wrap" v-if="list.advertiseList && list.advertiseList.length > 0 ">
@@ -10,11 +10,11 @@
 					</swiper-item>
 				</swiper>
 			</view>
-			<class-bar />
+			<!-- <class-bar /> -->
 			<view class="index_list_main" v-if="list.recommendTenantList && list.recommendTenantList.length > 0 ">
 				<home-line-title title="推荐艺人" linkUrl="./tenantAll?type=2"></home-line-title>
 				<view class="list_main_content">
-					<view class="list_main_item" v-for="(item,index) in list.recommendTenantList" :key="index" @click="getstarDetails(item)">
+					<view class="list_main_item" v-for="(item,index) in list.recommendTenantList" v-if="index < 3" :key="index" @click="getstarDetails(item)">
 						<image class="list_main_img" :src="item.thumbnailUrl" mode="aspectFill"></image>
 						<view class="list_main_text">
 							<view class="list_main_name">{{ item.realName }}</view>
@@ -33,7 +33,7 @@
 			<view class="index_list_main" v-if="list.hotTenantList && list.hotTenantList.length > 0 ">
 				<home-line-title title="人气明星" linkUrl="./tenantAll?type=1"></home-line-title>
 				<view class="list_main_content">
-					<view class="list_main_item popularStars" v-for="(item,index) in list.hotTenantList" :key="index" @click="getstarDetails(item)">
+					<view class="list_main_item popularStars" v-for="(item,index) in list.hotTenantList" v-if="index < 3" :key="index" @click="getstarDetails(item)">
 						<image class="list_main_img" :src="item.thumbnailUrl" mode="aspectFill"></image>
 						<image class="popularStarsTagimg" src="../../static/pages/picture/popularStar.png" mode="aspectFill"></image>
 						<view class="list_main_text">
@@ -58,7 +58,7 @@
 			<view class="index_list_main" v-if="list.discountTenantList && list.discountTenantList.length > 0 ">
 				<home-line-title title="打折活动" linkUrl="./tenantAll?type=3"></home-line-title>
 				<view class="list_main_content">
-					<view class="list_main_item" v-for="(item,index) in list.discountTenantList" :key="index" @click="getstarDetails(item)">
+					<view class="list_main_item" v-for="(item,index) in list.discountTenantList" v-if="index < 3" :key="index" @click="getstarDetails(item)">
 						<image class="list_main_img" :src="item.thumbnailUrl" mode="aspectFill"></image>
 						<view class="list_main_text">
 							<view class="list_main_name">{{ item.realName }}</view>
@@ -76,7 +76,7 @@
 			<view class="index_list_main"  v-if="list.newTenantList && list.newTenantList.length > 0 ">
 				<home-line-title title="最新签约" linkUrl="./tenantAll?type=4"></home-line-title>
 				<view class="list_main_content">
-					<view class="list_main_item" v-for="(item,index) in list.newTenantList" :key="index" @click="getstarDetails(item)">
+					<view class="list_main_item" v-for="(item,index) in list.newTenantList" v-if="index < 3" :key="index" @click="getstarDetails(item)">
 						<image class="list_main_img" :src="item.thumbnailUrl" mode="aspectFill"></image>
 						<view class="list_main_text">
 							<view class="list_main_name">{{ item.realName }}</view>
@@ -95,7 +95,7 @@
 				<view class="index_list_main" v-if="cl.tenantList && cl.tenantList.length > 0 " v-for="(cl,indexl) in  list.customTagList" :key="indexl">
 					<home-line-title :title="cl.tenantTypeName" openType="reLaunch" :linkUrl="'../category/index?id='+cl.tenantTypeId"></home-line-title>
 					<view class="list_main_content">
-						<view class="list_main_item" v-for="(item,index) in cl.tenantList" :key="index" @click="getstarDetails(item)">
+						<view class="list_main_item" v-for="(item,index) in cl.tenantList" v-if="index < 3" :key="index" @click="getstarDetails(item)">
 							<image class="list_main_img" :src="item.thumbnailUrl" mode="aspectFill"></image>
 							<view class="list_main_text">
 								<view class="list_main_name">{{ item.realName }}</view>

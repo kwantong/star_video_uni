@@ -93,6 +93,7 @@
 						uni.stopPullDownRefresh()
 					}
 					this.searchFrom.pageNum = this.searchFrom.pageNum + 1
+					uni.hideLoading()
 				})
 				
 			}

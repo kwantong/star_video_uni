@@ -8,7 +8,19 @@
 				<image src="/static/pages/back.png" class="back-icon" @click="back" ></image>
 			</view>
 			<view class="nav-title" :style="{'text-align': titleAlign,'padding-left':(titleAlign==='left'?(showLogo?'110rpx':(showBack?'50rpx':'30rpx')):'0') }">{{title}}</view>
+			<!-- #ifdef MP-WEIXIN -->
+			<view v-if="showSearch" class='header-search-0'>
+				<uni-search-bar cancelButton="none" bgColor="#EEEEEE" class="header-search-input" :radius="100" placeholder="关键字"  @confirm="search" v-model="searchValue"></uni-search-bar>
+			</view>
+			<!-- #endif -->
+			<!-- #ifdef H5 -->
+			<view v-if="showSearch" class='header-search-1'>
+				<uni-search-bar cancelButton="none" bgColor="#EEEEEE" class="header-search-input" :radius="100" placeholder="关键字"  @confirm="search" v-model="searchValue"></uni-search-bar>
+			</view>
+			<!-- #endif -->
 		</view>
+		
+		
 	</view>
 </template>
 
@@ -32,6 +44,10 @@
 				type: Boolean,
 				default: false
 			},
+			showSearch: {
+				type: Boolean,
+				default: false
+			},
 			backgroundColor:{
 				type: String,
 				default: ''
@@ -40,7 +56,8 @@
 		data() {
 			return {
 				navH: 0,
-				statusBarHeight:0
+				statusBarHeight:0,
+				searchValue: ''
 			};
 		},
 		methods: {
@@ -54,13 +71,18 @@
 				uni.navigateBack({
 					delta: 1
 				})
+			},
+			search() {
+				uni.navigateTo({
+					url: "/pages/searchRes/searchRes?searchVal=" + this.searchValue
+				})
 			}
 		},
 		created() {
 			this.navH = this.StatusBar + 46
 			this.statusBarHeight = this.StatusBar
 			// console.log(this.statusBarHeight )
-		}
+		},
 	}
 </script>
 
@@ -70,8 +92,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  
-  
+  margin-bottom: 18rpx;
 }
 
 .status-title{
@@ -98,11 +119,11 @@
 }
 
 .log-icon{
-	width: 84rpx;
-	height: 110rpx;
+	width: 80rpx;
+	height: 100rpx;
 	position: absolute;
 	left: 20rpx;
-	bottom: -20rpx;
+	bottom: -12rpx;
 }
 
 .nav-title{
@@ -113,6 +134,22 @@
   text-align: justify;
   font-weight: 500;
   text-align: center;
+  margin-top: -6rpx;
   width: 100%;
+}
+.header-search-0 {
+	width: calc(100vw - 230rpx - 85px);
+	position: absolute;
+	left: 220rpx;
+	bottom: 0rpx;
+}
+.header-search-1 {
+	width: calc(100vw - 230rpx);
+	position: absolute;
+	left: 220rpx;
+	bottom: 0rpx;
+}
+.header-search-input {
+	color: #FFFFFF;
 }
 </style>

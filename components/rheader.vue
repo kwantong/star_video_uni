@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
 	<view class="header-wrap">
 		<view class='header-search-0'>
 			<uni-search-bar cancelButton="none" bgColor="#EEEEEE" class="header-search-input" :radius="100" placeholder="请输入搜索关键字"  @confirm="search" v-model="searchValue"></uni-search-bar>
@@ -34,11 +34,12 @@
 		position: relative;
 		z-index: 9999;
 	}
-	.header-search-0 {
+	/* .header-search-0 {
 		flex: 1 1 auto;
 		margin: 0 20rpx;
 	}
 	.header-search-input {
 		color: #FFFFFF;
-	}
+	} */
 </style>
+ -->
