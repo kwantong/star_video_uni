@@ -180,14 +180,14 @@
 	import dateFormat from '@/common/dateFormat.js'
 	import { tenantDetails,findRecommendList,collectionAdd,collectionDelete,videoList,commentList, toComment } from '@/api/home.js'
 	import { getWechatShareConfigParam } from '../../api/detail.js'
-	import { mapState } from 'vuex'
+	import { mapState, mapMutations } from 'vuex'
 	import { domain } from '@/api/domain.js'
 	export default {
 		components: {
 			HNavigationBar,TenantInfo,commentModel
 		},
 		onLoad(options){
-			
+			this.updateCacheUserInfo()
 			
 			//#ifdef MP-WEIXIN
 			if (options.scene) {
@@ -277,6 +277,7 @@
 			}
 		},
 		methods: {
+			...mapMutations(['updateCacheUserInfo']),
 			watchShopContent(e){
 				let {scrollTop} = e.detail
 				this.scrollTop = scrollTop

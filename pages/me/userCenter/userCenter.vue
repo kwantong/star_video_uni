@@ -43,6 +43,8 @@
 		</view>
 		
 		<view class="logout-btn" v-if="hasLogin" @click="onLogout">退出登录</view>
+		<view style="height:100rpx"></view>
+		
 	</view>
 </template>
 
@@ -191,7 +193,7 @@
 				uni.reLaunch({
 					url:'../../public/login'
 				})
-			}
+			},
 		}
 	}
 </script>

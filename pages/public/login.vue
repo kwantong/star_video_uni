@@ -106,7 +106,7 @@
 				</view>
 				<!-- #endif -->
 				<!-- #ifdef MP-WEIXIN -->
-				<button class="login-button"  @click="getUserProfile">
+				<button class="login-button"  @click="onShow">
 					<view class="login-item">
 						<view class="login-item-border">
 							<image class="login-icon-wx" src="../../static/pages/login/wechart.png"></image>
@@ -244,6 +244,7 @@
 					if (res.code) {
 						// 发起网络请求
 						that.wxCode  = res.code
+						console.log('登录成功！' + res.code)
 					} else {
 						console.log('登录失败！' + res.errMsg)
 					}

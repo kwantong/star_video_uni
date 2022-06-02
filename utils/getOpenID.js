@@ -1,6 +1,7 @@
 export function getOpenID(appid, secret, callback) {
 	uni.login({
 		success: function(res) {
+			alert(res.code)
 			if (res.code) {
 				var openid = '';
 				var url = 'https://api.weixin.qq.com/sns/jscode2session?appid=' + appid + '&secret=' + secret + '&js_code=' + res.code + '&grant_type=authorization_code';

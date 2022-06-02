@@ -97,7 +97,7 @@
 			  if (!this.videoAllPurposeList) {
 				return '--'
 			  }
-			  const purposeObj = this.videoAllPurposeList.find(p => p.id = this.orderInfo.videoPurposeId) || {}
+			  const purposeObj = this.videoAllPurposeList.find(p => p.id == this.orderInfo.videoPurposeId) || {}
 			  return purposeObj && purposeObj.purpose || '--'
 			}
 		},

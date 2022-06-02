@@ -207,6 +207,7 @@
 				// #endif
 			},
 			showProp:function(){
+				const that = this
 				uni.showModal({
 					title: '提醒',
 					content: '支付成功？',
@@ -217,6 +218,7 @@
 					confirmColor:'#FF2E80',
 					success: res => {
 						if(res.confirm){
+							that.updateCacheUserInfo()
 							uni.navigateTo({
 								url:'/pages/me/recharge/recharge-result?result=1'
 							})
